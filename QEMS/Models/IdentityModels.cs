@@ -20,6 +20,7 @@ namespace QEMS.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -29,5 +30,16 @@ namespace QEMS.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<SituationsOperators> SituationsOperators { get; set; }
+        public System.Data.Entity.DbSet<QEMS.Models.Person> People { get; set; }
+
+        //public System.Data.Entity.DbSet<QEMS.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<QEMS.Models.Kin> Kins { get; set; }
+
+        public System.Data.Entity.DbSet<QEMS.Models.Situation> Situations { get; set; }
+
+        public System.Data.Entity.DbSet<QEMS.Models.Operator> Operators { get; set; }
     }
 }
