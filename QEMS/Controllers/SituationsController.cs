@@ -26,6 +26,14 @@ namespace QEMS.Controllers
             return View(await situations.ToListAsync());
         }
 
+        public async Task<ActionResult> PersonsSituations()
+        {
+            var appid = StaticMethods.GetAppId();
+            Person person = await db.People.Include(p => p.ApplicationUser).Where(p => p.ApplicationId == appid).FirstOrDefaultAsync();
+            var situations = await db.Situations.Include(s => s.Person).Where(s=>s.PersonId == person.PersonId).ToListAsync();
+            return View(situations);
+        }
+
         // GET: Situations/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -44,8 +52,8 @@ namespace QEMS.Controllers
         // GET: Situations/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName");
-            return View();
+            Situation situation = new Situation();
+            return View(situation);
         }
 
         // POST: Situations/Create
@@ -53,16 +61,19 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "SituationId,Message,Time,Date,Severity,CallPoliceStation,CallFireStation,CallAmbulance,InProcess,Complete,PersonId")] Situation situation)
+        public async Task<ActionResult> Create([Bind(Include = "Message,Time,Date,Severity,")] Situation situation)
         {
+            var appid = StaticMethods.GetAppId();
+            Person person = db.People.Include(p => p.ApplicationUser).Where(p=>p.ApplicationId == appid).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                situation.PersonId = person.PersonId;
                 db.Situations.Add(situation);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
             return View(situation);
         }
 
@@ -78,7 +89,7 @@ namespace QEMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
             return View(situation);
         }
 
@@ -87,7 +98,7 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "SituationId,Message,Time,Date,Severity,CallPoliceStation,CallFireStation,CallAmbulance,InProcess,Complete,PersonId")] Situation situation)
+        public async Task<ActionResult> Edit([Bind(Include = "Message,Time,Date,Severity,CallPoliceStation,CallFireStation,CallAmbulance,InProcess,Complete")] Situation situation, int id)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +106,7 @@ namespace QEMS.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
             return View(situation);
         }
 

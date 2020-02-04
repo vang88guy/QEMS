@@ -26,13 +26,14 @@ namespace QEMS.Controllers
         }
 
         // GET: Operators/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details()
         {
-            if (id == null)
+            var appid = StaticMethods.GetAppId();
+            if (appid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Operator @operator = await db.Operators.FindAsync(id);
+            Operator @operator = await db.Operators.Include(o=>o.ApplicationUser).FirstOrDefaultAsync(o=>o.ApplicationId == appid);
             if (@operator == null)
             {
                 return HttpNotFound();
@@ -43,7 +44,8 @@ namespace QEMS.Controllers
         // GET: Operators/Create
         public ActionResult Create()
         {
-            return View();
+            Operator @operator = new Operator();
+            return View(@operator);
         }
 
         // POST: Operators/Create
@@ -51,13 +53,14 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "OperatorId,FirstName,LastName,Addresss,City,State,ZipCode")] Operator @operator)
+        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Addresss,City,State,ZipCode")] Operator @operator)
         {
             if (ModelState.IsValid)
             {
+                @operator.ApplicationId = StaticMethods.GetAppId();
                 db.Operators.Add(@operator);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("LogOut", "Account");
             }
 
             return View(@operator);
@@ -70,7 +73,7 @@ namespace QEMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Operator @operator = await db.Operators.FindAsync(id);
+            Operator @operator = await db.Operators.Include(o=>o.ApplicationUser).Where(o=>o.OperatorId == id).FirstOrDefaultAsync();
             if (@operator == null)
             {
                 return HttpNotFound();
@@ -83,7 +86,7 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "OperatorId,FirstName,LastName,Addresss,City,State,ZipCode")] Operator @operator)
+        public async Task<ActionResult> Edit([Bind(Include = "ApplicationUser.UserName,ApplicationUser.Email,FirstName,LastName,Addresss,City,State,ZipCode")] Operator @operator)
         {
             if (ModelState.IsValid)
             {

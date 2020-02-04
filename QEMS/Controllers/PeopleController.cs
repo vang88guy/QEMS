@@ -45,8 +45,9 @@ namespace QEMS.Controllers
         // GET: People/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            //ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
+            Person person = new Person();
+            return View(person);
         }
 
         // POST: People/Create
@@ -61,24 +62,24 @@ namespace QEMS.Controllers
                 person.ApplicationId = StaticMethods.GetAppId(); ;
                 db.People.Add(person);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("LogOut", "Account");
             }
             return View(person);
         }
 
         // GET: People/Edit/5
         public async Task<ActionResult> Edit(int? id)
-        {
+        { 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = await db.People.FindAsync(id);
+            Person person = await db.People.Include(p => p.ApplicationUser).Where(p => p.PersonId == id).FirstOrDefaultAsync();
             if (person == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", person.ApplicationId);
+           
             return View(person);
         }
 
@@ -87,7 +88,7 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PersonId,FirstName,MiddleName,LastName,DateOfBirth,PhoneNumber,Addresss,City,State,ZipCode,LicenseNumber,ApplicationId")] Person person)
+        public async Task<ActionResult> Edit([Bind(Include = "ApplicationUser.UserName,ApplicationUser.Email,FirstName,MiddleName,LastName,DateOfBirth,PhoneNumber,Addresss,City,State,ZipCode,LicenseNumber")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +96,6 @@ namespace QEMS.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", person.ApplicationId);
             return View(person);
         }
 

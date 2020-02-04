@@ -394,6 +394,12 @@ namespace QEMS.Controllers
             return View(model);
         }
 
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Account");
+        }
+
         //
         // POST: /Account/LogOff
         [HttpPost]
