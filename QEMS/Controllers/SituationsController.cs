@@ -22,8 +22,13 @@ namespace QEMS.Controllers
         // GET: Situations
         public async Task<ActionResult> Index()
         {
-            var situations = db.Situations.Include(s => s.Person);
-            return View(await situations.ToListAsync());
+            var situations5 = await db.Situations.Include(s => s.Person).Where(s=>s.Severity == 5).ToListAsync();
+            var situations4 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 4).ToListAsync();
+            var situations3 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 3).ToListAsync();
+            var situations2 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 2).ToListAsync();
+            var situations1 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 1).ToListAsync();
+            var situations = situations5.Concat(situations4).Concat(situations3).Concat(situations2).Concat(situations1);
+            return View(situations);
         }
 
         public async Task<ActionResult> PersonsSituations()

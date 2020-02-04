@@ -18,7 +18,7 @@ namespace QEMS.Models
         [Display(Name = "Date")]
         public string Date { get; set; }
         [Display(Name = "Severity")]
-        public string Severity { get; set; }
+        public int Severity { get; set; }
         [Display(Name = "Call Police Station")]
         public bool CallPoliceStation { get; set; }
         [Display(Name = "Call Fire Station")]
