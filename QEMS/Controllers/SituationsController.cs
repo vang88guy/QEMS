@@ -14,9 +14,11 @@ namespace QEMS.Controllers
     public class SituationsController : Controller
     {
         private ApplicationDbContext db;
+        private SMSController SMS;
         public SituationsController()
         {
             db = new ApplicationDbContext();
+            SMS = new SMSController();
         }
 
         // GET: Situations
@@ -70,11 +72,22 @@ namespace QEMS.Controllers
         {
             var appid = StaticMethods.GetAppId();
             Person person = db.People.Include(p => p.ApplicationUser).Where(p=>p.ApplicationId == appid).FirstOrDefault();
+            
             if (ModelState.IsValid)
             {
                 situation.PersonId = person.PersonId;
                 db.Situations.Add(situation);
                 await db.SaveChangesAsync();
+                if (person.MiddleName != null)
+                {
+                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.MiddleName + " " + person.LastName;
+                }
+                else 
+                {
+                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.LastName;
+                }
+                PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k=>k.PhoneNumber).ToListAsync();
+                SMS.SendSMSToKin();
                 return RedirectToAction("Index");
             }
 

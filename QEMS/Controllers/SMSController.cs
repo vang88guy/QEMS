@@ -17,7 +17,7 @@ namespace QEMS.Controllers
 {
     public class SMSController : TwilioController
     {
-        public ActionResult SendSMSToPlayers()
+        public ActionResult SendSMSToKin()
         {
             var accountSid = TwilioAcct;
             var authToken = TwilioToken;
@@ -32,7 +32,7 @@ namespace QEMS.Controllers
             {
                 var message = MessageResource.Create(
                     body: "Your kin " + PhoneNumbers.NameOfPerson + " is in an emergency situation, we are contacting the proper authorities on the behalf of your kin.",
-                    from: new PhoneNumber("+12562420890"),
+                    from: new PhoneNumber("+12029317370"),
                     to: new PhoneNumber(number)
                 );
 
