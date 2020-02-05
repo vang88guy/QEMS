@@ -9,7 +9,7 @@ namespace QEMS.Models
     public static class StaticMethods
     {
         public static string GetAppId()
-        {
+        {           
             var userid = HttpContext.Current.User.Identity.GetUserId();
             return userid;
         }

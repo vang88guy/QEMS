@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using QEMS.Models;
 
+
 namespace QEMS.Controllers
 {
     public class SituationsController : Controller
@@ -93,6 +94,39 @@ namespace QEMS.Controllers
 
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
             return View(situation);
+        }
+
+        public async void CreateFromTextMessage()
+        {           
+            Person person = db.People.Include(p => p.ApplicationUser).Where(p => p.PhoneNumber == PhoneNumbers.InComingNumber).FirstOrDefault();
+            Situation situation = new Situation();
+            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            string timenow = System.DateTime.Now.ToString("h:mm tt");
+            string message = PhoneNumbers.TextMessage;
+            int result = 0;
+            bool success = int.TryParse(new string(message
+                                 .SkipWhile(x => !char.IsDigit(x))
+                                 .TakeWhile(x => char.IsDigit(x))
+                                 .ToArray()), out result);
+          
+                situation.PersonId = person.PersonId;
+                situation.Message = PhoneNumbers.TextMessage;
+                situation.Time = timenow;
+                situation.Date = datenow;
+                situation.Severity = result;
+                db.Situations.Add(situation);
+                await db.SaveChangesAsync();
+                if (person.MiddleName != null)
+                {
+                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.MiddleName + " " + person.LastName;
+                }
+                else
+                {
+                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.LastName;
+                }
+                PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k => k.PhoneNumber).ToListAsync();
+                SMS.SendSMSToKin();
+                          
         }
 
         // GET: Situations/Edit/5

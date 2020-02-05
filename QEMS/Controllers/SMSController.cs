@@ -7,11 +7,13 @@ using System.Configuration;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
-using Twilio.TwiML;
+using Twilio.TwiML.Messaging;
 using Twilio.AspNet.Mvc;
 using System.Windows.Documents;
 using static QEMS.Models.TwilioAPIKey;
 using QEMS.Models;
+using System.Threading.Tasks;
+using Twilio.TwiML;
 
 namespace QEMS.Controllers
 {
@@ -41,6 +43,16 @@ namespace QEMS.Controllers
 
             }
             return View("PlayerInterestEvents", "Events");
+        }
+        [HttpPost]
+        public async Task<ActionResult> ReceiveSMS(string From, string Body)
+        {
+            var messagingResponse = new MessagingResponse();
+            var message = new Message();
+            var body = message.Body();
+            PhoneNumbers.InComingNumber = From;
+            PhoneNumbers.TextMessage = Body;
+            return  RedirectToAction("CreateFromTextMessage", "Situations");
         }
     }
 }
