@@ -69,13 +69,17 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Message,Time,Date,Severity,")] Situation situation)
+        public async Task<ActionResult> Create([Bind(Include = "Message,Severity,")] Situation situation)
         {
             var appid = StaticMethods.GetAppId();
             Person person = db.People.Include(p => p.ApplicationUser).Where(p=>p.ApplicationId == appid).FirstOrDefault();
-            
+            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            string timenow = System.DateTime.Now.ToString("h:mm tt");
+
             if (ModelState.IsValid)
             {
+                situation.Time = timenow;
+                situation.Date = datenow;
                 situation.PersonId = person.PersonId;
                 db.Situations.Add(situation);
                 await db.SaveChangesAsync();

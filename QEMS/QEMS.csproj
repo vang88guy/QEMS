@@ -416,6 +416,7 @@
     <Content Include="Views\Operators\Details.cshtml" />
     <Content Include="Views\Operators\Edit.cshtml" />
     <Content Include="Views\Operators\Index.cshtml" />
+    <Content Include="Views\Situations\PersonsSituations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

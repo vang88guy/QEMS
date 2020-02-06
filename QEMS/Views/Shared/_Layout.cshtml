@@ -21,6 +21,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin") == true)
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("People", "Index", "People")</li>
+                        <li>@Html.ActionLink("Operators", "Index", "Operators")</li>
+                        <li>@Html.ActionLink("Situations", "Index", "Situations")</li>
+                        <li>@Html.ActionLink("List of Kins", "Index", "Kins")</li>
+                    }
+                    @if (User.IsInRole("Person") == true)
+                    {
+                        <li>@Html.ActionLink("Home", "Create", "Situations")</li>
+                        <li>@Html.ActionLink("Situations","PersonsSituations","Situations")</li>
+                        <li>@Html.ActionLink("Profile", "Details", "People")</li>
+                        <li>@Html.ActionLink("Kin", "Index", "Kins")</li>
+                    }
+                    @if (User.IsInRole("Operator") == true)
+                    {
+
+                    }
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
