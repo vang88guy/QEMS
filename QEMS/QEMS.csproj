@@ -307,21 +307,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001302129506_Initial.cs" />
-    <Compile Include="Migrations\202001302129506_Initial.Designer.cs">
-      <DependentUpon>202001302129506_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001302154462_Making Tables.cs" />
-    <Compile Include="Migrations\202001302154462_Making Tables.Designer.cs">
-      <DependentUpon>202001302154462_Making Tables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002021841375_Add FK to operator model.cs" />
-    <Compile Include="Migrations\202002021841375_Add FK to operator model.Designer.cs">
-      <DependentUpon>202002021841375_Add FK to operator model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002041735109_Severity change from string to int.cs" />
-    <Compile Include="Migrations\202002041735109_Severity change from string to int.Designer.cs">
-      <DependentUpon>202002041735109_Severity change from string to int.cs</DependentUpon>
+    <Compile Include="Migrations\202002071627525_initial.cs" />
+    <Compile Include="Migrations\202002071627525_initial.Designer.cs">
+      <DependentUpon>202002071627525_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -417,6 +405,7 @@
     <Content Include="Views\Operators\Edit.cshtml" />
     <Content Include="Views\Operators\Index.cshtml" />
     <Content Include="Views\Situations\PersonsSituations.cshtml" />
+    <Content Include="Views\Kins\ListOfKinForThePersonToSee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -436,17 +425,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001302129506_Initial.resx">
-      <DependentUpon>202001302129506_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001302154462_Making Tables.resx">
-      <DependentUpon>202001302154462_Making Tables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002021841375_Add FK to operator model.resx">
-      <DependentUpon>202002021841375_Add FK to operator model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002041735109_Severity change from string to int.resx">
-      <DependentUpon>202002041735109_Severity change from string to int.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002071627525_initial.resx">
+      <DependentUpon>202002071627525_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

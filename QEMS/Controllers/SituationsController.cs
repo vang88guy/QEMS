@@ -8,18 +8,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QEMS.Models;
-
+using System.Globalization;
 
 namespace QEMS.Controllers
 {
     public class SituationsController : Controller
     {
         private ApplicationDbContext db;
-        private SMSController SMS;
+        private SMSController SMS = new SMSController();
         public SituationsController()
         {
             db = new ApplicationDbContext();
-            SMS = new SMSController();
+            
         }
 
         // GET: Situations
@@ -100,38 +100,38 @@ namespace QEMS.Controllers
             return View(situation);
         }
 
-        public async void CreateFromTextMessage()
-        {           
-            Person person = db.People.Include(p => p.ApplicationUser).Where(p => p.PhoneNumber == PhoneNumbers.InComingNumber).FirstOrDefault();
-            Situation situation = new Situation();
-            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
-            string timenow = System.DateTime.Now.ToString("h:mm tt");
-            string message = PhoneNumbers.TextMessage;
-            int result = 0;
-            bool success = int.TryParse(new string(message
-                                 .SkipWhile(x => !char.IsDigit(x))
-                                 .TakeWhile(x => char.IsDigit(x))
-                                 .ToArray()), out result);
+        //public async void CreateFromTextMessage()
+        //{           
+        //    Person person = db.People.Include(p => p.ApplicationUser).Where(p => p.PhoneNumber == PhoneNumbers.InComingNumber).FirstOrDefault();
+        //    Situation situation = new Situation();
+        //    string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+        //    string timenow = System.DateTime.Now.ToString("h:mm tt");
+        //    string message = PhoneNumbers.TextMessage;
+        //    int result = 0;
+        //    bool success = int.TryParse(new string(message
+        //                         .SkipWhile(x => !char.IsDigit(x))
+        //                         .TakeWhile(x => char.IsDigit(x))
+        //                         .ToArray()), out result);
           
-                situation.PersonId = person.PersonId;
-                situation.Message = PhoneNumbers.TextMessage;
-                situation.Time = timenow;
-                situation.Date = datenow;
-                situation.Severity = result;
-                db.Situations.Add(situation);
-                await db.SaveChangesAsync();
-                if (person.MiddleName != null)
-                {
-                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.MiddleName + " " + person.LastName;
-                }
-                else
-                {
-                    PhoneNumbers.NameOfPerson = person.FirstName + " " + person.LastName;
-                }
-                PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k => k.PhoneNumber).ToListAsync();
-                SMS.SendSMSToKin();
+        //        situation.PersonId = person.PersonId;
+        //        situation.Message = PhoneNumbers.TextMessage;
+        //        situation.Time = timenow;
+        //        situation.Date = datenow;
+        //        situation.Severity = result;
+        //        db.Situations.Add(situation);
+        //        await db.SaveChangesAsync();
+        //        if (person.MiddleName != null)
+        //        {
+        //            PhoneNumbers.NameOfPerson = person.FirstName + " " + person.MiddleName + " " + person.LastName;
+        //        }
+        //        else
+        //        {
+        //            PhoneNumbers.NameOfPerson = person.FirstName + " " + person.LastName;
+        //        }
+        //        PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k => k.PhoneNumber).ToListAsync();
+        //        SMS.SendSMSToKin();
                           
-        }
+        //}
 
         // GET: Situations/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -154,11 +154,25 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Message,Time,Date,Severity,CallPoliceStation,CallFireStation,CallAmbulance,InProcess,Complete")] Situation situation, int id)
+        public async Task<ActionResult> Edit(Situation situation, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(situation).State = EntityState.Modified;
+                
+                var situationedit = await db.Situations.Include(s => s.Person).Where(s => s.SituationId == id).FirstOrDefaultAsync();
+                if (situationedit.Time != situation.Time)
+                {
+                    var timenow = GetTimeFormat(situation.Time);
+                    situationedit.Time = timenow;
+                }
+                if (situationedit.Date != situation.Date)
+                {
+                    var datenow = GetDateFormat(situation.Date);
+                    situationedit.Date = datenow;
+                }
+                situationedit.Message = situation.Message;
+                situationedit.Complete = situation.Complete;
+                
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -199,6 +213,19 @@ namespace QEMS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public string GetDateFormat(string date)
+        {
+            DateTime dateformat = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            string dateofevent = dateformat.ToString("MM/dd/yyyy");
+            return dateofevent;
+        }
+        public string GetTimeFormat(string time)
+        {
+            DateTime timeformat = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+            string timeofevent = timeformat.ToString("h:mm tt");
+            return timeofevent;
         }
     }
 }

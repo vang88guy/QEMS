@@ -50,30 +50,33 @@
         <dd>
             @Html.DisplayFor(model => model.Severity)
         </dd>
+        @if (User.IsInRole("Operator") == true)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.CallPoliceStation)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CallPoliceStation)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CallPoliceStation)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CallPoliceStation)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CallFireStation)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CallFireStation)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CallFireStation)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CallFireStation)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CallAmbulance)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CallAmbulance)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CallAmbulance)
+            </dd>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.CallAmbulance)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.InProcess)

@@ -61,10 +61,10 @@ namespace QEMS
             }
 
             // creating Creating Employee role     
-            if (!roleManager.RoleExists("Employee"))
+            if (!roleManager.RoleExists("Operator"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Operator";
                 roleManager.Create(role);
 
             }

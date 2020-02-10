@@ -71,7 +71,7 @@ namespace QEMS.Controllers
                 kin.PersonId = person.PersonId; 
                 db.Kins.Add(kin);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details","People");
+                return RedirectToAction("ListOfKinForThePersonToSee", "Kins");
             }
 
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", kin.PersonId);

@@ -6,35 +6,55 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Situation</h4>
-        <hr />
+
+<div class="form-horizontal">
+    <h4>Situation</h4>
+    <hr />
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Motor Vehicle Theft" />
+        <input type="hidden" name="Severity" id="Severity" value="1" />
+        <input type="submit" class="btn btn-default" value="Motor Vehicle Theft" />
+    }
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Burglary" />
+        <input type="hidden" name="Severity" id="Severity" value="3" />
+        <input type="submit" class="btn btn-default" value="Burglary" />
+    }
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Larceny / Theft" />
+        <input type="hidden" name="Severity" id="Severity" value="2" />
+        <input type="submit" class="btn btn-default" value="Larceny / Theft" />
+    }
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Aggravated Assault" />
+        <input type="hidden" name="Severity" id="Severity" value="5" />
+        <input type="submit" class="btn btn-default" value="Aggravated Assault" />
+    }
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Robbery" />
+        <input type="hidden" name="Severity" id="Severity" value="4" />
+        <input type="submit" class="btn btn-default" value="Robbery" />
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -47,71 +67,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CallPoliceStation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.CallPoliceStation)
-                    @Html.ValidationMessageFor(model => model.CallPoliceStation, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CallFireStation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.CallFireStation)
-                    @Html.ValidationMessageFor(model => model.CallFireStation, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CallAmbulance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.CallAmbulance)
-                    @Html.ValidationMessageFor(model => model.CallAmbulance, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.InProcess, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.InProcess)
-                    @Html.ValidationMessageFor(model => model.InProcess, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Complete, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Complete)
-                    @Html.ValidationMessageFor(model => model.Complete, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PersonId, "PersonId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PersonId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PersonId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>
-}
 
+    }
+</div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

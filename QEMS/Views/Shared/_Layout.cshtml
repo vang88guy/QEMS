@@ -34,7 +34,7 @@
                         <li>@Html.ActionLink("Home", "Create", "Situations")</li>
                         <li>@Html.ActionLink("Situations","PersonsSituations","Situations")</li>
                         <li>@Html.ActionLink("Profile", "Details", "People")</li>
-                        <li>@Html.ActionLink("Kin", "Index", "Kins")</li>
+                        <li>@Html.ActionLink("Kin", "ListOfKinForThePersonToSee", "Kins")</li>
                     }
                     @if (User.IsInRole("Operator") == true)
                     {

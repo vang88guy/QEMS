@@ -34,7 +34,7 @@ namespace QEMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = await db.People.FindAsync(appid);
+            Person person = await db.People.Include(p=>p.ApplicationUser).FirstOrDefaultAsync(p=>p.ApplicationId == appid);
             if (person == null)
             {
                 return HttpNotFound();
@@ -88,13 +88,27 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ApplicationUser.UserName,ApplicationUser.Email,FirstName,MiddleName,LastName,DateOfBirth,PhoneNumber,Addresss,City,State,ZipCode,LicenseNumber")] Person person)
+        public async Task<ActionResult> Edit(Person person, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                person.ApplicationId = StaticMethods.GetAppId();               
+                var personedit = await db.People.Include(p => p.ApplicationUser).Where(p => p.PersonId == id).FirstOrDefaultAsync();
+                var user = personedit.ApplicationUser;
+                personedit.ApplicationUser.UserName = person.ApplicationUser.UserName;
+                personedit.ApplicationUser.Email = person.ApplicationUser.Email;
+                personedit.FirstName = person.FirstName;
+                personedit.MiddleName = person.MiddleName;
+                personedit.LastName = person.LastName;
+                personedit.PhoneNumber = person.PhoneNumber;
+                personedit.DateOfBirth = person.DateOfBirth;
+                personedit.Addresss = person.Addresss;
+                personedit.City = person.City;
+                personedit.State = person.State;
+                personedit.ZipCode = person.ZipCode;
+                personedit.LicenseNumber = person.LicenseNumber;
+                db.SaveChanges();
+                return RedirectToAction("Details");
             }
             return View(person);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,11 @@ namespace QEMS.Controllers
 {
     public class SMSController : TwilioController
     {
+        ApplicationDbContext db;
+        public SMSController()
+        {
+            db = new ApplicationDbContext();
+        }
         public ActionResult SendSMSToKin()
         {
             var accountSid = TwilioAcct;
@@ -52,7 +58,49 @@ namespace QEMS.Controllers
             var body = message.Body();
             PhoneNumbers.InComingNumber = From;
             PhoneNumbers.TextMessage = Body;
+            CreateFromTextMessage();
             return  RedirectToAction("CreateFromTextMessage", "Situations");
+        }
+        public async void CreateFromTextMessage()
+        {
+            Person person = db.People.Include(p => p.ApplicationUser).Where(p => p.PhoneNumber == PhoneNumbers.InComingNumber).FirstOrDefault();
+            Situation situation = new Situation();
+            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+            string timenow = System.DateTime.Now.ToString("h:mm tt");
+            string message = PhoneNumbers.TextMessage;
+            int result = 0;
+            bool success = int.TryParse(new string(message
+                                 .SkipWhile(x => !char.IsDigit(x))
+                                 .TakeWhile(x => char.IsDigit(x))
+                                 .ToArray()), out result);
+
+            situation.PersonId = person.PersonId;
+            situation.Message = PhoneNumbers.TextMessage;
+            situation.Time = timenow;
+            situation.Date = datenow;
+            situation.Severity = result;
+            db.Situations.Add(situation);
+            await db.SaveChangesAsync();
+            if (person.MiddleName != null)
+            {
+                PhoneNumbers.NameOfPerson = person.FirstName + " " + person.MiddleName + " " + person.LastName;
+            }
+            else
+            {
+                PhoneNumbers.NameOfPerson = person.FirstName + " " + person.LastName;
+            }
+            PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k => k.PhoneNumber).ToListAsync();
+            SendSMSToKin();
+
+        }
+
+        [HttpPost]
+        public TwiMLResult Index()
+        {
+            var messagingResponse = new MessagingResponse();
+            messagingResponse.Message("The Robots are coming! Head for the hills!");
+
+            return TwiML(messagingResponse);
         }
     }
 }

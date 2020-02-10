@@ -79,21 +79,38 @@ namespace QEMS.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             var user = await UserManager.FindAsync(model.UserName, model.Password);
-            var roles = await UserManager.GetRolesAsync(user.Id);
+            
             switch (result)
             {
                 case SignInStatus.Success:
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    //if (User.IsInRole("Admin") == true)
+                    //{
+                    //    return RedirectToAction("Index", "Home");
+                    //}
+                    //else if (User.IsInRole("Person") == true)
+                    //{
+                    //    return RedirectToAction("Create", "Situtions");
+                    //}
+                    //else if (User.IsInRole("Oeprator") == true)
+                    //{
+                    //    return RedirectToAction("Details", "Operator");
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToLocal(returnUrl);
+                    //}
                     if (roles.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "Home");
                     }
                     else if (roles.Contains("Person"))
                     {
-                        return RedirectToAction("Create", "Situtions");
+                        return RedirectToAction("Create", "Situations");
                     }
                     else if (roles.Contains("Operator"))
                     {
-                        return RedirectToAction("Details", "Operator");
+                        return RedirectToAction("Details", "Operators");
                     }
                     else
                     {
@@ -172,7 +189,7 @@ namespace QEMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -185,8 +202,14 @@ namespace QEMS.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     //Assign Role to user Here       
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-
-                    return RedirectToAction("Index", "Home");
+                    if (model.UserRoles == "Person")
+                    {
+                        return RedirectToAction("Create", "People");
+                    }
+                    else if (model.UserRoles == "Operator")
+                    {
+                        return RedirectToAction("Create", "Operators");
+                    }
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                   .ToList(), "Name", "Name");
