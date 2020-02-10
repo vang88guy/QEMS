@@ -1,0 +1,67 @@
+﻿@model IEnumerable<QEMS.Models.SituationsOperators>
+
+@{
+    ViewBag.Title = "OperatorSituationsForAdmin";
+}
+
+<h2>OperatorSituationsForAdmin</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Operator User Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Situation.Person.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Situation.Person.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Situation.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Situation.Severity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Operator.ApplicationUser.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Situation.Person.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Situation.Person.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Situation.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Situation.Severity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Person Details", "DetailsById", new { Controller = "People" ,id = item.Situation.PersonId })|
+            @Html.ActionLink("Operator Details", "DetailsById", new { Controller = "Operators" , id = item.OperatorId })|
+            @Html.ActionLink("Situation Details", "Details", new { Controller = "Situations" , id = item.SituationId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -3,9 +3,14 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>QEMS</h1>
+    <p class="lead">QEMS is the Quiet Emergency Messaging System. It allows you to contact the Police and the proper authorities when an emergency situation happens without having to call them.
+    @if (User.IsInRole("Person") == true)
+    {
+    <p>You are able to text an emergency situation by texting this number (209)931-7370. In the text also add a number from 1 through 5 for the severity of the situation, 1 being least and 5 being greatest.</p>
+    }
+    </p>
+   
 </div>
 
 <div class="row">
@@ -18,14 +23,6 @@
         </p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    
+   
 </div>

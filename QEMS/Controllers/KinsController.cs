@@ -34,6 +34,19 @@ namespace QEMS.Controllers
             return View(kins);
         }
 
+        public async Task<ActionResult> ListOfKinForTheOperatorToSee(int id)
+        {
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var kins = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == id).ToListAsync();
+            if (kins == null)
+            {
+                return HttpNotFound();
+            }
+            return View(kins);
+        }
 
         // GET: Kins/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -106,7 +119,7 @@ namespace QEMS.Controllers
             {
                 kinnow.Name = kin.Name;
                 kinnow.Relation = kin.Relation;
-                kinnow.PhoneNumber = kin.Address;
+                kinnow.PhoneNumber = kin.PhoneNumber;
                 kinnow.City = kin.City;
                 kinnow.State = kin.State;
                 kinnow.ZipCode = kin.ZipCode;

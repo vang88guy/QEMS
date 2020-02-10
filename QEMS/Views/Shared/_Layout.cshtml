@@ -5,46 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Template/css/bootstrap/css")*@
     @Scripts.Render("~/bundles/modernizr")
 
+			
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+        <div class="container" >
+            @*<div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @Html.ActionLink("QEMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>*@
+            <div class="navbar navbar-expand-sm bg-white navbar-dark" >
+                <span class="nav navbar-nav">
+                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("QEMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</span>
                     @if (User.IsInRole("Admin") == true)
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("People", "Index", "People")</li>
-                        <li>@Html.ActionLink("Operators", "Index", "Operators")</li>
-                        <li>@Html.ActionLink("Situations", "Index", "Situations")</li>
-                        <li>@Html.ActionLink("List of Kins", "Index", "Kins")</li>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Home", "Index", "Home")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations + Operators", "OperatorSituationsForAdmin", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("People", "Index", "People")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Operators", "Index", "Operators")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "Index", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("List of Kins", "Index", "Kins")</span>
                     }
                     @if (User.IsInRole("Person") == true)
                     {
-                        <li>@Html.ActionLink("Home", "Create", "Situations")</li>
-                        <li>@Html.ActionLink("Situations","PersonsSituations","Situations")</li>
-                        <li>@Html.ActionLink("Profile", "Details", "People")</li>
-                        <li>@Html.ActionLink("Kin", "ListOfKinForThePersonToSee", "Kins")</li>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Home", "Create", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "PersonsSituations", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Profile", "Details", "People")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Kin", "ListOfKinForThePersonToSee", "Kins")</span>
                     }
                     @if (User.IsInRole("Operator") == true)
                     {
-
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "Index", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Completed Situations", "CompletedSituations", "Situations")</span>
+                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Profile", "Details", "Operators")</span>
                     }
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("About", "About", "Home")</span>
+                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Contact", "Contact", "Home")</span>
+                </span>
+                <span class="navbar-brand font-weight-bolder text-uppercase py-0">
+                    @Html.Partial("_LoginPartial")
+                </span>
+               
             </div>
         </div>
     </div>

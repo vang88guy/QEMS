@@ -41,6 +41,21 @@ namespace QEMS.Controllers
             return View(@operator);
         }
 
+        public async Task<ActionResult> DetailsById(int id)
+        {
+            
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Operator @operator = await db.Operators.Include(o => o.ApplicationUser).FirstOrDefaultAsync(o => o.OperatorId == id);
+            if (@operator == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@operator);
+        }
+
         // GET: Operators/Create
         public ActionResult Create()
         {

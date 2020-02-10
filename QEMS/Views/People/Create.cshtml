@@ -50,7 +50,7 @@
             @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "+10000000000", new { @class = "text-danger" })
             </div>
         </div>
 

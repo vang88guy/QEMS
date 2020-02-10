@@ -1,0 +1,140 @@
+﻿@model IEnumerable<QEMS.Models.Situation>
+
+@{
+    ViewBag.Title = "CompletedSituations";
+}
+
+<h2>CompletedSituations</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.Addresss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.LicenseNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Severity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallPoliceStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallFireStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallAmbulance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InProcess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Complete)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.Addresss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.LicenseNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Severity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallPoliceStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallFireStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallAmbulance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InProcess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Complete)
+        </td>
+        <td>
+            @Html.ActionLink("Person Details", "DetailsById", "People", new { id = item.PersonId })|
+            @Html.ActionLink("List of Kin", "ListOfKinForTheOperatorToSee", "Kins", new { id = item.PersonId })|
+            @Html.ActionLink("Edit", "Edit", new { id = item.SituationId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.SituationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SituationId })
+        </td>
+    </tr>
+}
+
+</table>

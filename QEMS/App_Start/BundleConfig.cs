@@ -24,6 +24,7 @@ namespace QEMS
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/navbar.css",
                       "~/Content/site.css"));
         }
     }

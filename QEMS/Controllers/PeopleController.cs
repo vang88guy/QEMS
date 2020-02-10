@@ -42,6 +42,19 @@ namespace QEMS.Controllers
             return View(person);
         }
 
+        public async Task<ActionResult> DetailsById(int id)
+        {         
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Person person = await db.People.Include(p => p.ApplicationUser).FirstOrDefaultAsync(p => p.PersonId == id);
+            if (person == null)
+            {
+                return HttpNotFound();
+            }
+            return View(person);
+        }
         // GET: People/Create
         public ActionResult Create()
         {

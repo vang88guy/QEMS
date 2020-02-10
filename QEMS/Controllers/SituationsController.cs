@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using QEMS.Models;
 using System.Globalization;
 
+
 namespace QEMS.Controllers
 {
     public class SituationsController : Controller
@@ -22,15 +23,27 @@ namespace QEMS.Controllers
             
         }
 
+        public async Task<ActionResult> OperatorSituationsForAdmin()
+        {
+            var situations = await db.SituationsOperators.Include(s => s.Situation).Include(s => s.Situation.Person).Include(s => s.Situation.Person.ApplicationUser).Include(s => s.Operator).Include(s => s.Operator.ApplicationUser).ToListAsync();
+            return View(situations);
+        }
+
         // GET: Situations
         public async Task<ActionResult> Index()
-        {
-            var situations5 = await db.Situations.Include(s => s.Person).Where(s=>s.Severity == 5).ToListAsync();
-            var situations4 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 4).ToListAsync();
-            var situations3 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 3).ToListAsync();
-            var situations2 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 2).ToListAsync();
-            var situations1 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 1).ToListAsync();
+        {         
+            var situations5 = await db.Situations.Include(s => s.Person).Where(s=>s.Severity >= 5 && s.Complete == false).ToListAsync();
+            var situations4 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 4 && s.Complete == false).ToListAsync();
+            var situations3 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 3 && s.Complete == false).ToListAsync();
+            var situations2 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 2 && s.Complete == false).ToListAsync();
+            var situations1 = await db.Situations.Include(s => s.Person).Where(s => s.Severity == 1 && s.Complete == false).ToListAsync();
             var situations = situations5.Concat(situations4).Concat(situations3).Concat(situations2).Concat(situations1);
+            return View(situations);
+        }
+
+        public async Task<ActionResult> CompletedSituations()
+        {
+            var situations = await db.Situations.Include(s => s.Person).Where(s => s.Complete == true).ToListAsync();
             return View(situations);
         }
 
@@ -43,9 +56,9 @@ namespace QEMS.Controllers
         }
 
         // GET: Situations/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -73,8 +86,8 @@ namespace QEMS.Controllers
         {
             var appid = StaticMethods.GetAppId();
             Person person = db.People.Include(p => p.ApplicationUser).Where(p=>p.ApplicationId == appid).FirstOrDefault();
-            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
-            string timenow = System.DateTime.Now.ToString("h:mm tt");
+            string datenow = StaticMethods.GetDate();
+            string timenow = StaticMethods.GetTime();
 
             if (ModelState.IsValid)
             {
@@ -172,6 +185,26 @@ namespace QEMS.Controllers
                 }
                 situationedit.Message = situation.Message;
                 situationedit.Complete = situation.Complete;
+                if (User.IsInRole("Operator") == true)
+                {
+                    situationedit.CallAmbulance = situation.CallAmbulance;
+                    situationedit.CallFireStation = situation.CallFireStation;
+                    situationedit.CallPoliceStation = situation.CallPoliceStation;
+                    situationedit.InProcess = situation.InProcess;
+                    SituationsOperators situationsOperators = new SituationsOperators();
+                    var appid = StaticMethods.GetAppId();
+                    var operatornow = await db.Operators.Include(o => o.ApplicationUser).FirstOrDefaultAsync(o=>o.ApplicationId == appid);
+                    situationsOperators.Date = StaticMethods.GetDate();
+                    situationsOperators.Time = StaticMethods.GetTime();
+                    situationsOperators.SituationId = situationedit.SituationId;
+                    situationsOperators.OperatorId = operatornow.OperatorId;
+                    var situationsoperator2 = await db.SituationsOperators.Include(s => s.Situation).Include(s => s.Situation.Person).Include(s => s.Situation.Person.ApplicationUser).Include(s => s.Operator).Include(s => s.Operator.ApplicationUser).Where(s => s.OperatorId == operatornow.OperatorId && s.SituationId == situationedit.SituationId).FirstOrDefaultAsync();
+                    if (situationsoperator2 == null)
+                    {
+                        db.SituationsOperators.Add(situationsOperators);
+                    }
+                    
+                }
                 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

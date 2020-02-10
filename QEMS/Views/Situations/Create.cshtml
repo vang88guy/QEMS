@@ -34,6 +34,13 @@
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
+        <input type="hidden" name="Message" id="Message" value="Car Accident" />
+        <input type="hidden" name="Severity" id="Severity" value="3" />
+        <input type="submit" class="btn btn-default" value="Car Accident" />
+    }
+    @using (Html.BeginForm("Create", "Situations"))
+    {
+        @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Aggravated Assault" />
         <input type="hidden" name="Severity" id="Severity" value="5" />
         <input type="submit" class="btn btn-default" value="Aggravated Assault" />

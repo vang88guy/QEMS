@@ -6,13 +6,38 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Person.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.Addresss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.LicenseNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Message)
@@ -45,43 +70,76 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Person.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Severity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CallPoliceStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CallFireStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CallAmbulance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InProcess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Complete)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SituationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SituationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SituationId })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.MiddleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.DateOfBirth)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.Addresss)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.State)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.ZipCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.LicenseNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Message)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Severity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CallPoliceStation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CallFireStation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CallAmbulance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InProcess)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Complete)
+    </td>
+    <td>
+        @Html.ActionLink("Person Details", "DetailsById", new { Controller = "People", id = item.Person.PersonId})|
+        @Html.ActionLink("List of Kin", "ListOfKinForTheOperatorToSee", new { Controller = "Kins", id = item.Person.PersonId})|
+        @Html.ActionLink("Edit", "Edit", new { id = item.SituationId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.SituationId }) |
+        @if (User.IsInRole("Admin") == true)
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = item.SituationId })
+        }
+
+    </td>
+</tr>
 }
 
 </table>
