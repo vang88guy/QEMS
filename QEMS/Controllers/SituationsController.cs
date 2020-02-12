@@ -106,7 +106,7 @@ namespace QEMS.Controllers
                 }
                 PhoneNumbers.PhoneNumbersToMessage = await db.Kins.Include(k => k.Person).Where(k => k.PersonId == person.PersonId).Select(k=>k.PhoneNumber).ToListAsync();
                 SMS.SendSMSToKin();
-                return RedirectToAction("Index");
+                return RedirectToAction("PersonsSituations", "Situations");
             }
 
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", situation.PersonId);
@@ -236,7 +236,7 @@ namespace QEMS.Controllers
             Situation situation = await db.Situations.FindAsync(id);
             db.Situations.Remove(situation);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("PersonsSituations", "Situations");
         }
 
         protected override void Dispose(bool disposing)

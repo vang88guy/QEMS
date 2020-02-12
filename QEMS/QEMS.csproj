@@ -329,9 +329,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap4.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -437,23 +437,7 @@
     <Content Include="Template\blog-home.html" />
     <Content Include="Template\blog-single.html" />
     <Content Include="Template\contact.html" />
-    <Content Include="Template\css\animate.min.css" />
-    <Content Include="Template\css\bootstrap.css" />
-    <Content Include="Template\css\bootstrap\bootstrap-grid.css" />
-    <Content Include="Template\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="Template\css\bootstrap\bootstrap.css" />
-    <Content Include="Template\css\font-awesome.min.css" />
-    <Content Include="Template\css\jquery.DonutWidget.min.css" />
-    <Content Include="Template\css\jquerysctipttop.css" />
-    <Content Include="Template\css\linearicons.css" />
-    <Content Include="Template\css\magnific-popup.css" />
-    <Content Include="Template\css\main.css" />
-    <Content Include="Template\css\nice-select.css" />
-    <Content Include="Template\css\owl.carousel.css" />
-    <Content Include="Template\css\theme\pages.css" />
     <Content Include="Template\elements.html" />
-    <Content Include="Template\fonts\fontawesome-webfont.svg" />
-    <Content Include="Template\fonts\Linearicons-Free.svg" />
     <Content Include="Template\img\b1.jpg" />
     <Content Include="Template\img\b2.jpg" />
     <Content Include="Template\img\b3.jpg" />
@@ -525,25 +509,6 @@
     <Content Include="Template\img\s2.jpg" />
     <Content Include="Template\img\s3.jpg" />
     <Content Include="Template\index.html" />
-    <Content Include="Template\js\easing.min.js" />
-    <Content Include="Template\js\hoverIntent.js" />
-    <Content Include="Template\js\imagesloaded.pkgd.min.js" />
-    <Content Include="Template\js\jquery.ajaxchimp.min.js" />
-    <Content Include="Template\js\jquery.counterup.min.js" />
-    <Content Include="Template\js\jquery.magnific-popup.min.js" />
-    <Content Include="Template\js\jquery.nice-select.min.js" />
-    <Content Include="Template\js\jquery.sticky.js" />
-    <Content Include="Template\js\justified.min.js" />
-    <Content Include="Template\js\mail-script.js" />
-    <Content Include="Template\js\main.js" />
-    <Content Include="Template\js\owl.carousel.min.js" />
-    <Content Include="Template\js\parallax.min.js" />
-    <Content Include="Template\js\slick.js" />
-    <Content Include="Template\js\superfish.js" />
-    <Content Include="Template\js\superfish.min.js" />
-    <Content Include="Template\js\vendor\bootstrap.min.js" />
-    <Content Include="Template\js\vendor\jquery-2.2.4.min.js" />
-    <Content Include="Template\js\waypoints.min.js" />
     <Content Include="Template\mail.php" />
     <Content Include="Template\price.html" />
     <Content Include="Template\Security - Doc\css\font-awesome.min.css" />
@@ -666,21 +631,8 @@
     <Content Include="Views\Situations\OperatorSituationsForAdmin.cshtml" />
     <Content Include="Views\Operators\DetailsById.cshtml" />
     <Content Include="Template\.DS_Store" />
-    <Content Include="Template\css\.DS_Store" />
-    <Content Include="Template\css\bootstrap.map" />
-    <Content Include="Template\css\main.map" />
-    <Content Include="Template\fonts\fontawesome-webfont.eot" />
-    <Content Include="Template\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Template\fonts\fontawesome-webfont.woff" />
-    <Content Include="Template\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Template\fonts\FontAwesome.otf" />
-    <Content Include="Template\fonts\Linearicons-Free.eot" />
-    <Content Include="Template\fonts\Linearicons-Free.ttf" />
-    <Content Include="Template\fonts\Linearicons-Free.woff" />
-    <Content Include="Template\fonts\Linearicons-Free.woff2" />
     <Content Include="Template\img\.DS_Store" />
     <Content Include="Template\img\blog\.DS_Store" />
-    <Content Include="Template\js\.DS_Store" />
     <Content Include="Template\scss\.DS_Store" />
     <Content Include="Template\scss\bootstrap.scss" />
     <Content Include="Template\scss\bootstrap\.DS_Store" />
@@ -798,6 +750,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_LayoutPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

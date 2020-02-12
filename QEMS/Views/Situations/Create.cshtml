@@ -15,43 +15,49 @@
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Motor Vehicle Theft" />
         <input type="hidden" name="Severity" id="Severity" value="1" />
-        <input type="submit" class="btn btn-default" value="Motor Vehicle Theft" />
+        <input type="submit" class="btn btn-default" value="Motor Vehicle Theft" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Burglary" />
         <input type="hidden" name="Severity" id="Severity" value="3" />
-        <input type="submit" class="btn btn-default" value="Burglary" />
+        <input type="submit" class="btn btn-default" value="Burglary" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Larceny / Theft" />
         <input type="hidden" name="Severity" id="Severity" value="2" />
-        <input type="submit" class="btn btn-default" value="Larceny / Theft" />
+        <input type="submit" class="btn btn-default" value="Larceny / Theft" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Car Accident" />
         <input type="hidden" name="Severity" id="Severity" value="3" />
-        <input type="submit" class="btn btn-default" value="Car Accident" />
+        <input type="submit" class="btn btn-default" value="Car Accident" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Aggravated Assault" />
         <input type="hidden" name="Severity" id="Severity" value="5" />
-        <input type="submit" class="btn btn-default" value="Aggravated Assault" />
+        <input type="submit" class="btn btn-default" value="Aggravated Assault" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Robbery" />
         <input type="hidden" name="Severity" id="Severity" value="4" />
-        <input type="submit" class="btn btn-default" value="Robbery" />
+        <input type="submit" class="btn btn-default" value="Robbery" style="border:1px solid white" />
     }
+    <hr>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -75,7 +81,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" style="border:1px solid white"/>
             </div>
         </div>
 
