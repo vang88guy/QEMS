@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<QEMS.Models.Situation>
-
+    <head>
+        @if (User.IsInRole("Operator") == true)
+        {
+            <meta http-equiv="refresh" content="8" />
+        }
+    </head>
 @{
     ViewBag.Title = "Index";
 }
@@ -39,31 +44,31 @@
         <th>
             @Html.DisplayNameFor(model => model.Person.LicenseNumber)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Message)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Time)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Severity)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallPoliceStation)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallFireStation)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallAmbulance)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.InProcess)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Complete)
         </th>
         <th></th>
@@ -101,34 +106,34 @@
     <td>
         @Html.DisplayFor(modelItem => item.Person.LicenseNumber)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.Message)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.Time)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.Date)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.Severity)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.CallPoliceStation)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.CallFireStation)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.CallAmbulance)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.InProcess)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.DisplayFor(modelItem => item.Complete)
     </td>
-    <td>
+    <td style="background-color:goldenrod">
         @Html.ActionLink("Person Details", "DetailsById", new { Controller = "People", id = item.Person.PersonId})|
         @Html.ActionLink("List of Kin", "ListOfKinForTheOperatorToSee", new { Controller = "Kins", id = item.Person.PersonId})|
         @Html.ActionLink("Edit", "Edit", new { id = item.SituationId }) |

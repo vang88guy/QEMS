@@ -5,7 +5,10 @@
 }
 
 <h2>Create</h2>
-
+@if (User.IsInRole("Person") == true)
+{
+    <p style="color:black; font-size:15px">You are able to text an emergency situation by texting this number (209)931-7370. In the text also add a number from 1 through 5 for the severity of the situation, 1 being least and 5 being greatest.</p>
+}
 
 <div class="form-horizontal">
     <h4>Situation</h4>
@@ -15,67 +18,73 @@
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Motor Vehicle Theft" />
         <input type="hidden" name="Severity" id="Severity" value="1" />
-        <input type="submit" class="btn btn-default" value="Motor Vehicle Theft" />
+        <input type="submit" class="btn btn-default" value="Motor Vehicle Theft" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Burglary" />
         <input type="hidden" name="Severity" id="Severity" value="3" />
-        <input type="submit" class="btn btn-default" value="Burglary" />
+        <input type="submit" class="btn btn-default" value="Burglary" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Larceny / Theft" />
         <input type="hidden" name="Severity" id="Severity" value="2" />
-        <input type="submit" class="btn btn-default" value="Larceny / Theft" />
+        <input type="submit" class="btn btn-default" value="Larceny / Theft" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Car Accident" />
         <input type="hidden" name="Severity" id="Severity" value="3" />
-        <input type="submit" class="btn btn-default" value="Car Accident" />
+        <input type="submit" class="btn btn-default" value="Car Accident" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Aggravated Assault" />
         <input type="hidden" name="Severity" id="Severity" value="5" />
-        <input type="submit" class="btn btn-default" value="Aggravated Assault" />
+        <input type="submit" class="btn btn-default" value="Aggravated Assault" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm("Create", "Situations"))
     {
         @Html.AntiForgeryToken()
         <input type="hidden" name="Message" id="Message" value="Robbery" />
         <input type="hidden" name="Severity" id="Severity" value="4" />
-        <input type="submit" class="btn btn-default" value="Robbery" />
+        <input type="submit" class="btn btn-default" value="Robbery" style="border:1px solid black; color: white; background-color:royalblue" />
     }
+    <hr />
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2", style = "color:black" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <hr />
         <div class="form-group">
-            @Html.LabelFor(model => model.Severity, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Severity, htmlAttributes: new { @class = "control-label col-md-2", style = "color:black" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Severity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Severity, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <hr />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" style="border:1px solid black" />
             </div>
         </div>
 

@@ -112,7 +112,7 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Name,Relation,PhoneNumber,Address,City,State,ZipCode")] Kin kin, int id)
+        public async Task<ActionResult> Edit( Kin kin, int id)
         {
             Kin kinnow = await db.Kins.Include(k => k.Person).Where(k => k.KinId == id).FirstOrDefaultAsync();
             if (ModelState.IsValid)
@@ -124,7 +124,7 @@ namespace QEMS.Controllers
                 kinnow.State = kin.State;
                 kinnow.ZipCode = kin.ZipCode;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("ListOfKinForThePersonToSee");
             }
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", kin.PersonId);
             return View(kin);
@@ -154,7 +154,7 @@ namespace QEMS.Controllers
             kin.PersonId = 0;
             db.Kins.Remove(kin);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("ListOfKinForThePersonToSee");
         }
 
         protected override void Dispose(bool disposing)

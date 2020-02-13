@@ -101,13 +101,23 @@ namespace QEMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ApplicationUser.UserName,ApplicationUser.Email,FirstName,LastName,Addresss,City,State,ZipCode")] Operator @operator)
+        public async Task<ActionResult> Edit(Operator @operator, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@operator).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                @operator.ApplicationId = @operator.ApplicationUser.Id;
+                var operatoredit = await db.Operators.Include(o => o.ApplicationUser).FirstOrDefaultAsync(o => o.OperatorId == id);
+                operatoredit.ApplicationUser.UserName = @operator.ApplicationUser.UserName;
+                operatoredit.ApplicationUser.Email = @operator.ApplicationUser.Email;
+                operatoredit.FirstName = @operator.FirstName;
+                operatoredit.LastName = @operator.LastName;
+                operatoredit.Addresss = @operator.Addresss;
+                operatoredit.City = @operator.City;
+                operatoredit.State = @operator.State;
+                operatoredit.ZipCode = @operator.ZipCode;
+
+                db.SaveChanges();
+                return RedirectToAction("Details");
             }
             return View(@operator);
         }

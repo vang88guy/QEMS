@@ -38,10 +38,10 @@
         <th>
             @Html.DisplayNameFor(model => model.State)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.LicenseNumber)
         </th>
         <th></th>
@@ -76,13 +76,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.State)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.LicenseNumber)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) |
             @Html.ActionLink("Details", "Details", new { id=item.PersonId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })

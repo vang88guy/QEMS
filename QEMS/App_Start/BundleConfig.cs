@@ -23,9 +23,13 @@ namespace QEMS
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap4.css",
                       "~/Content/navbar.css",
                       "~/Content/site.css"));
+            //bundles.Add(new StyleBundle("~/css").Include(
+            //         "~/bootstrap.css",
+            //         "~/Content/navbar.css",
+            //         "~/Content/site.css"));
         }
     }
 }

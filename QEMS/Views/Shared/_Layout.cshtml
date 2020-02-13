@@ -11,52 +11,57 @@
 			
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container" >
-            @*<div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+
+
+    <div class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+        <div class="container" style="height:40px">
+            <nav nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="height:40px"  >
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("QEMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>*@
-            <div class="navbar navbar-expand-sm bg-white navbar-dark" >
-                <span class="nav navbar-nav">
-                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("QEMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</span>
-                    @if (User.IsInRole("Admin") == true)
-                    {
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Home", "Index", "Home")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations + Operators", "OperatorSituationsForAdmin", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("People", "Index", "People")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Operators", "Index", "Operators")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "Index", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("List of Kins", "Index", "Kins")</span>
-                    }
-                    @if (User.IsInRole("Person") == true)
-                    {
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Home", "Create", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "PersonsSituations", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Profile", "Details", "People")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Kin", "ListOfKinForThePersonToSee", "Kins")</span>
-                    }
-                    @if (User.IsInRole("Operator") == true)
-                    {
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Situations", "Index", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Completed Situations", "CompletedSituations", "Situations")</span>
-                        <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Profile", "Details", "Operators")</span>
-                    }
-                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("About", "About", "Home")</span>
-                    <span class="navbar-brand font-weight-bolder text-uppercase py-0">@Html.ActionLink("Contact", "Contact", "Home")</span>
-                </span>
-                <span class="navbar-brand font-weight-bolder text-uppercase py-0">
-                    @Html.Partial("_LoginPartial")
-                </span>
-               
-            </div>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    
+                    <ul class="navbar-nav">
+                        <li class="nav-item active navbar-brand font-weight-bolder text-uppercase ">@Html.ActionLink("QEMS", "Index", "Home") </li>
+
+                       
+
+                        @if (User.IsInRole("Admin") == true)
+                        {
+                            <li class="nav-item navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" Home ", "Index", "Home") </li>
+                            <li class="nav-item navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" Situations + Operators ", "OperatorSituationsForAdmin", "Situations") </li>
+                            <li class="nav-item navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" People ", "Index", "People") </li>
+                            <li class="nav-item navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" Operators ", "Index", "Operators") </li>
+                            <li class="nav-item navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" Situations ", "Index", "Situations") </li>
+                            <li class="nav-item active navbar-brand navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" List of Kins ", "Index", "Kins") </li>
+                        }
+                        @if (User.IsInRole("Person") == true)
+                        {
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Home ", "Create", "Situations") </li>
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Situations ", "PersonsSituations", "Situations") </li>
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase "> @Html.ActionLink(" Profile ", "Details", "People") </li>
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Kin ", "ListOfKinForThePersonToSee", "Kins") </li>
+                        }
+                        @if (User.IsInRole("Operator") == true)
+                        {
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Situations ", "Index", "Situations") </li>
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Completed Situations ", "CompletedSituations", "Situations") </li>
+                            <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Profile", "Details ", "Operators") </li>
+                        }
+                        <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" About ", "About", "Home") </li>
+                        <li class="nav-item active navbar-brand font-weight-bolder text-uppercase"> @Html.ActionLink(" Contact ", "Contact", "Home") </li>
+                    </ul>
+                    <span class="navbar-right">
+                        @Html.Partial("_LoginPartial")
+                    </span>
+
+                </div>
+            </nav>
         </div>
     </div>
-    <div class="container body-content">
+    <hr>
+   
+    <div class="container body-content" id="myDIV"  style="background-color:darkslategrey">
         @RenderBody()
         <hr />
         <footer>

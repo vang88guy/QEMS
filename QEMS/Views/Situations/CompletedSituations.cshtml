@@ -47,22 +47,22 @@
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Severity)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallPoliceStation)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallFireStation)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.CallAmbulance)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.InProcess)
         </th>
-        <th>
+        <th style="background-color:goldenrod">
             @Html.DisplayNameFor(model => model.Complete)
         </th>
         <th></th>
@@ -109,25 +109,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.Severity)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.CallPoliceStation)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.CallFireStation)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.CallAmbulance)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.InProcess)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.DisplayFor(modelItem => item.Complete)
         </td>
-        <td>
+        <td style="background-color:goldenrod">
             @Html.ActionLink("Person Details", "DetailsById", "People", new { id = item.PersonId })|
             @Html.ActionLink("List of Kin", "ListOfKinForTheOperatorToSee", "Kins", new { id = item.PersonId })|
             @Html.ActionLink("Edit", "Edit", new { id = item.SituationId }) |
