@@ -332,6 +332,7 @@
     <Content Include="Content\about.html" />
     <Content Include="Content\blog-home.html" />
     <Content Include="Content\blog-single.html" />
+
     <Content Include="Content\bootstrap4.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

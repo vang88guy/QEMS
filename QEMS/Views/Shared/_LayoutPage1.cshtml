@@ -1,18 +1,44 @@
 ﻿<!DOCTYPE html>
+<<<<<<< HEAD
 <html>
 <head>
     
 
+=======
+
+<html>
+<head>
+>>>>>>> ec8d25e7aeb6e4b9e78426b75cb9a41111210d88
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+<<<<<<< HEAD
     @*@Styles.Render("~/Template/css/bootstrap/css")*@
     @Scripts.Render("~/bundles/modernizr")
+=======
+    @Styles.Render("~/Template/css/bootstrap/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width" />
+>>>>>>> ec8d25e7aeb6e4b9e78426b75cb9a41111210d88
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <!--
     CSS
     ============================================= -->
+<<<<<<< HEAD
     <link rel="stylesheet" href=@Url.Content("/Content/css/linearicons.css")>
     <link rel="stylesheet" href=@Url.Content("/Content/css/font-awesome.min.css")>
     <link rel="stylesheet" href=@Url.Content("/Content/css/bootstrap.css")>
@@ -74,6 +100,34 @@
                     <ul>
                         <li><a href="tel:+1414 213 6131"><span>+1 414 213 6131</span> <span class="lnr lnr-phone-handset"></span></a></li>
                         <li class="nav-item active navbar-brand font-weight-bolder text-uppercase">@Html.Partial("_LoginPartial")</li>
+=======
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header id="header" id="home">
+        <div class="container header-top">
+            <div class="row">
+                @*<div class="col-6 top-head-left">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>*@
+                <div class="col-6 top-head-right">
+                    <ul>
+                        <li><a href="tel:+1414 213 6131"><span>+1414 213 6131</span> <span class="lnr lnr-phone-handset"></span></a></li>
+                        <li>@Html.Partial("_LoginPartial")</li>
+>>>>>>> ec8d25e7aeb6e4b9e78426b75cb9a41111210d88
                     </ul>
                 </div>
             </div>
@@ -82,6 +136,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
+<<<<<<< HEAD
                     <a class="nav-item active navbar-brand font-weight-bolder text-uppercase " style="color:white"><img src="~/Content/img/logo45.png" alt="" title="" style="height:50px;"/></a>
                 </div>
 
@@ -119,10 +174,42 @@
 
                     </ul>
 
+=======
+                    <a><img src="img/logo.png" alt="" title="" />@Html.ActionLink("QEMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active">@Html.ActionLink("QEMS", "Index", "Home")</li>
+                        @if (User.IsInRole("Admin") == true)
+                        {
+                            <li>@Html.ActionLink("Situations + Operators", "OperatorSituationsForAdmin", "Situations")</li>
+                            <li>@Html.ActionLink("People", "Index", "People")</li>
+                            <li>@Html.ActionLink("Operators", "Index", "Operators")</li>
+                            <li>@Html.ActionLink("Situations", "Index", "Situations")</li>
+                            <li>@Html.ActionLink("List of Kins", "Index", "Kins")</li>
+                        }
+                        @if (User.IsInRole("Person") == true)
+                        {
+                            <li>@Html.ActionLink("Home", "Create", "Situations")</li>
+                            <li>@Html.ActionLink("Situations", "PersonsSituations", "Situations")</li>
+                            <li>@Html.ActionLink("Profile", "Details", "People")</li>
+                            <li>@Html.ActionLink("Kin", "ListOfKinForThePersonToSee", "Kins")</li>
+                        }
+                        @if (User.IsInRole("Operator") == true)
+                        {
+                            <li>@Html.ActionLink("Situations", "Index", "Situations")</li>
+                            <li>@Html.ActionLink("Completed Situations", "CompletedSituations", "Situations")</li>
+                            <li>@Html.ActionLink("Profile", "Details", "Operators")</li>
+                        }
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+>>>>>>> ec8d25e7aeb6e4b9e78426b75cb9a41111210d88
                 </nav><!-- #nav-menu-container -->
             </div>
         </div>
     </header><!-- #header -->
+<<<<<<< HEAD
     <!-- start banner Area -->
     <section class="banner-area relative" id="home">
 
@@ -499,5 +586,18 @@
     <script src=@Url.Content("/Content/js/parallax.min.js")></script>
     <script src=@Url.Content("/Content/js/mail-script.js")></script>
     <script src=@Url.Content("/Content/js/main.js")></script>
+=======
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+>>>>>>> ec8d25e7aeb6e4b9e78426b75cb9a41111210d88
 </body>
 </html>
